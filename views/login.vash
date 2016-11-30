@@ -1,0 +1,28 @@
+@html.extend('layout', function(model) {
+	@html.block("body", function(model) {
+		<h3>Login</h3>
+		@if (model.message) {
+			<p>@model.message</p>
+		}
+		<form action="/login" method="post" role="form" class="form-horizontal">
+			<div class="form-group">
+				<label class="control-label col-lg-1">Username</label>
+				<div class="col-lg-5">
+					<input type="text" name="username" placeholder="username" class="form-control"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-lg-1">Password</label>
+				<div class="col-lg-5">
+					<input type="password" name="password" placeholder="password" class="form-control"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-offset-1 col-lg-5">
+					<input type="submit" value="register" class="btn btn-primary"/>
+				</div>
+
+			</div>
+		</form>
+	})
+})

@@ -1,0 +1,50 @@
+@html.extend('layout', function(model) {
+
+	@html.block("scripts", function(model) {
+		<script src="/lib/socket.io-client/socket.io.js"></script>
+		<script src="/js/notesView.js"></script>
+	})
+
+	@html.block("body", function(model) {
+		<div  ng-app="notesView">
+			<a href="/" class="btn btn-info">Back</a>
+			<div ng-controller="notesViewController">
+				<div class="note note-yellow"
+				     ng-repeat="n in notes"
+				     ng-class="'note-' + n.color">
+					<div ng-bind="n.note"></div>
+					<div class="note-autor">
+						<small>-{{n.author}}</small>
+					</div>
+				</div>
+				<form role="form" name="newNoteForm" class="form-horizontal" ng-submit="save()" novalidate>
+					<div class="form-group">
+						<label class="control-label col-lg-1">Color</label>
+						<div class="col-lg-5">
+							<div class="btn-group">
+								<button type="button" ng-model="newNote.color" class="btn btn-primary" uib-btn-radio="'yellow'">yellow</button>
+								<button type="button" ng-model="newNote.color" class="btn btn-primary" uib-btn-radio="'green'">green</button>
+								<button type="button" ng-model="newNote.color" class="btn btn-primary" uib-btn-radio="'blue'">blue</button>
+								<button type="button" ng-model="newNote.color" class="btn btn-primary" uib-btn-radio="'orange'">orange</button>
+							</div>
+						</div>
+					</div>
+					<div>{{newNote}}</div>
+					<div class="form-group">
+						<label class="control-label col-lg-1">Content</label>
+						<div class="col-lg-5">
+							<textarea name="note" id="note" cols="30" rows="2" ng-model="newNote.note"></textarea>
+							<span ng-show="newNoteForm.note.$error.required">Required</span>
+							<p>{{ 120 - newNote.note.length }}</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-lg-offset-1 col-lg-5">
+							<input type="submit" value="Save" class="btn btn-primary"/>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	})
+})
